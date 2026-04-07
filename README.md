@@ -1,51 +1,59 @@
 # Nightlog
 
-A privacy-focused sleep and dream journal that runs on your infrastructure. Built as an agent for the Cocapn Fleet, it helps you track sleep patterns and record dreams, keeping all your data under your control.
+> Live instance: https://nightlog-ai.casey-digennaro.workers.dev
 
-It runs on Cloudflare Workers, is open source under the MIT license, and follows a fork-first model with no vendor lock-in.
+A privacy-first sleep and dream journal agent for the Cocapn Fleet. Your entries stay on your infrastructure.
 
-## Why Use This?
-
-Most sleep and wellness apps require you to surrender your personal data to a third-party service. This project offers an alternative. When you fork and deploy this repository, your data remains in your own Cloudflare KV storage. You can export it at any time, and the agent's behavior only changes when you decide to update the code. There is no central service, account, or company behind it.
-
-## How It Works
-
-This is a statically-hosted web application paired with a Cloudflare Worker agent. The agent manages all data operations and provides conversational insights via an AI API you configure.
-
-**Note:** You must provide your own API key for the AI features (e.g., from DeepSeek, OpenAI, or Anthropic). No analytics or telemetry are included.
-
-## Features
-
-*   **Sleep Tracking:** Log sleep times, quality, and notes. View calculated sleep debt and consistency scores.
-*   **Dream Journal:** Record dreams with tags and mood. All entries are fully searchable.
-*   **Data Privacy:** All data is stored in your own Cloudflare KV namespace and is never sent elsewhere.
-*   **Conversational Interface:** Ask questions about your sleep patterns in a chat interface. The agent can reference your historical data to provide context-aware insights.
-*   **Self-Hosted:** You control the deployment and all associated data.
-
-## Quick Start
-
-1.  **Fork this repository** to your own GitHub account.
-2.  Clone your fork locally.
-3.  Install the [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/install-and-update/).
-4.  Run `wrangler login` to authenticate with Cloudflare.
-5.  In the project directory, run `npm run setup`. This script will guide you through creating the required KV namespace and setting your AI API key as a secret.
-6.  Deploy with `npm run deploy`.
-
-Your agent will be live on your `*.workers.dev` subdomain. You can then deploy the frontend to any static host (like GitHub Pages) by serving the contents of the `/web` directory.
-
-**Limitation:** Setting up and maintaining this project requires basic comfort with developer tools and the Cloudflare dashboard.
-
-## Development
-
-*   Agent logic is in `/src`.
-*   The web interface is in `/web`.
-*   Use `npm run dev` to run a local preview of the agent.
-
-## Learn More
-
-This is an agent built for the Cocapn Fleet.
-*   [The Fleet](https://the-fleet.casey-digennaro.workers.dev)
-*   [Cocapn](https://cocapn.ai)
+This is open source MIT software deployed to Cloudflare Workers. It operates on a fork-first ownership model—you control your copy.
 
 ---
-Attribution: Superinstance & Lucineer (DiGennaro et al.).
+
+## Why this exists
+Many mainstream sleep and wellness apps monetize personal data. Nightlog was built as an alternative that doesn't.
+
+## How it's different
+This is an agent, not a service.
+- No central server. You fork and deploy your own instance.
+- All data is written to your private Cloudflare KV storage.
+- Code is auditable and contains no telemetry.
+- No accounts, terms of service, or subscription changes.
+
+---
+
+## How it works
+A static web interface pairs with a Cloudflare Worker agent. Data is stored in your KV namespace. AI insights use an API key you provide—requests are never proxied or logged.
+
+No analytics. No error reporting. Data only leaves your instance when you export it.
+
+> **Note:** AI features require your own LLM API key (DeepSeek, OpenAI, Anthropic, or compatible).
+
+---
+
+## Features
+*   **Sleep tracking:** Log times, quality, and notes. View calculated sleep debt and patterns.
+*   **Dream journal:** Record entries with tags and mood. Full text search runs locally in your browser.
+*   **Conversational agent:** Ask questions about your sleep history. Responses reference only your entries.
+*   **Data control:** Export all entries as JSON. Delete everything with one click.
+*   **No lock-in:** Move your deployment or stop using it at any time.
+
+---
+
+## Quick start
+1.  Fork this repository to your GitHub account.
+2.  Clone your fork locally.
+3.  Install [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/install-and-update/).
+4.  Run `wrangler login` to authenticate with Cloudflare.
+5.  Run `npm run setup` to create a KV namespace and set your API key.
+6.  Deploy with `npm run deploy`.
+
+Your agent will be live on your `*.workers.dev` subdomain. Host the frontend from `/web` on any static host if desired.
+
+> **Limitation:** Requires comfort with developer tools and a Cloudflare account. AI features depend on your chosen provider's availability and costs.
+
+---
+
+<div>
+  Part of the <a href="https://the-fleet.casey-digennaro.workers.dev">Cocapn Fleet</a> · 
+  <a href="https://cocapn.ai">Cocapn</a> · 
+  Attribution: Superinstance & Lucineer (DiGennaro et al.)
+</div>
